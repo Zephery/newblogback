@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>用户登录</title>
+    <style>
+        body {
+            margin-left: auto;
+            margin-right: auto;
+            margin-TOP: 100PX;
+            width: 20em;
+        }
+    </style>
+</head>
+<body>
+<form th:action="@{/login}" method="POST">
+    <!--下面是用户名输入框-->
+    <div class="input-group">
+        <span class="input-group-addon" id="basic-addon1"></span>
+        <input id="userName" name="adminname" type="text" class="form-control" placeholder="用户名"
+               aria-describedby="basic-addon1"/>
+    </div>
+    <br/>
+    <!--下面是密码输入框-->
+    <div class="input-group">
+        <span class="input-group-addon" id="basic-addon1"></span>
+        <input id="password" name="adminpasswd" type="text" class="form-control" placeholder="密码"
+               aria-describedby="basic-addon1"/>
+    </div>
+    <br/>
+    <!--下面是登陆按钮,包括颜色控制-->
+    <button type="submit" style="width:280px;" class="btn btn-default">登 录</button>
+</form>
+
+<!--<script th:src="@{/webjars/jquery/jquery.min.js}"></script>-->
+<!--<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>-->
+
+</body>
+</html>
