@@ -40,7 +40,7 @@ function subArticle() {
     $('#content-editor').val(content);
     $("#articleForm #categories").val($('#multiple-sel').val());
     var params = $("#articleForm").serialize();
-    var url = $('#articleForm #cid').val() != '' ? '/admin/article/modify' : '/admin/article/modify';
+    var url = $('#articleForm #cid').val() == '' ? '/admin/article/publish' : '/admin/article/modify';
     tale.post({
         url:url,
         data:params,

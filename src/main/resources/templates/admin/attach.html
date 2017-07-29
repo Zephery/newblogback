@@ -1,7 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" th:with="title='文件管理',active='attach'">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:with="title='文件管理',active='attach'"
+      xmlns="http://www.w3.org/1999/html">
 <header th:replace="admin/header::headerFragment(${title},${active})"></header>
 <link href="//cdn.bootcss.com/dropzone/4.3.0/min/dropzone.min.css" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <style>
     #dropzone {
         margin-bottom: 3rem;
@@ -46,6 +50,26 @@
     <div class="content-page">
         <div class="content">
             <div class="container">
+                <div class="row">
+                    <form role="form">
+                        <div class="form-group">
+                            <label for="name">名称</label>
+                            <input type="text" class="form-control" id="name"
+                                   placeholder="请输入名称"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputfile">文件输入</label>
+                            <input type="file" id="inputfile"/>
+                            <p class="help-block">这里是块级帮助文本的实例。</p>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" value="dagou"/>
+                            </label>
+                        </div>
+                        <button type="submit" class="btn btn-default">提交</button>
+                    </form>
+                </div>
                 <div class="row">
                     <div class="col-sm-12">
                         <h4 class="page-title">文件管理</h4>

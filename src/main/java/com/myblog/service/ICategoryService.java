@@ -10,4 +10,6 @@ import java.util.List;
 public interface ICategoryService {
     public List<Category> getAllCategory();
     public Category selectByPrimaryKey(Integer categoryid);
+    public void update_category(String cName,Integer cId);
+    public Integer delete_category(Integer cId);
 }

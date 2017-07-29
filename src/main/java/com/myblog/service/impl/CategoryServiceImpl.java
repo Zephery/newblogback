@@ -6,6 +6,7 @@ import com.myblog.service.ICategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -13,7 +14,7 @@ import java.util.List;
  */
 @Service("categoryService")
 public class CategoryServiceImpl implements ICategoryService {
-    @Autowired
+    @Resource
     private CategoryMapper categoryMapper;
 
     @Override
@@ -26,4 +27,13 @@ public class CategoryServiceImpl implements ICategoryService {
         return categoryMapper.selectByPrimaryKey(categoryid);
     }
 
+    @Override
+    public void update_category(String cName, Integer cId) {
+        categoryMapper.update_category(cName, cId);
+    }
+
+    @Override
+    public Integer delete_category(Integer cId) {
+        return categoryMapper.deleteByPrimaryKey(cId);
+    }
 }

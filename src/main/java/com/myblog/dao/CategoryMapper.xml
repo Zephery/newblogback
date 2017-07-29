@@ -84,4 +84,9 @@
         <include refid="Base_Column_List"/>
         from category
     </select>
+    <update id="update_category">
+    update category
+    set c_name = #{cName,jdbcType=VARCHAR},
+    where c_id = #{cId,jdbcType=INTEGER}
+     </update>
 </mapper>

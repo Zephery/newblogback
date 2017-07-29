@@ -1,40 +1,33 @@
 package com.myblog.service.impl;
 
-import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import com.myblog.dao.CategoryMapper;
 import com.myblog.dao.TagMapper;
 import com.myblog.model.Blog;
-import com.myblog.model.Category;
 import com.myblog.model.KeyAndValue;
 import com.myblog.model.Tag;
 import com.myblog.service.ITagService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.hash.Jackson2HashMapper;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import javax.annotation.Resource;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by Zephery on 2017/6/20.
  */
 @Service("tagService")
 public class TagServiceImpl implements ITagService {
-    @Autowired
+    @Resource
     private TagMapper tagMapper;
-    @Autowired
+    @Resource
     private CategoryMapper categoryMapper;
-    @Autowired
+    @Resource
     private RedisTemplate<String, ?> redisTemplate;
 
     @Override
@@ -63,5 +56,8 @@ public class TagServiceImpl implements ITagService {
             }
         });
         return tId;
+    }
+    public List<Tag> getAllTags(){
+        return tagMapper.getAllTags();
     }
 }

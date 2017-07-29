@@ -60,13 +60,13 @@
                             </div>
 
                             <div class="form-group col-md-6">
-                                <select id="multiple-sel" class="select2 form-control" multiple="multiple" data-placeholder="请选择分类...">
+                                <select id="multiple-sel" class="select2 form-control" name="categoryid" multiple="multiple" data-placeholder="请选择分类...">
                                     <th:block th:if="${null == categories}">
                                         <option value="默认分类" selected="selected">默认分类</option>
                                     </th:block>
                                     <th:block th:unless="${null == categories}">
                                         <th:block th:each="c : ${categories}">
-                                            <option th:value="${c.cName}" th:text="${c.cName}"  th:selected="${null !=blog and c.cId==blog.category.cId?true:false}" ></option>
+                                            <option th:value="${c.cId}" th:text="${c.cName}"  th:selected="${null !=blog and c.cId==blog.category.cId?true:false}" ></option>
                                         </th:block>
                                     </th:block>
                                 </select>
