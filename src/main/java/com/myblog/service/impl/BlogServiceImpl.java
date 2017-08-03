@@ -186,6 +186,7 @@ public class BlogServiceImpl implements IBlogService {
             }
         }
         blog.setTags(tags.size() == 0 ? null : tags);
+        blog.setHits(0);
         blogMapper.insert(blog);
         if (tags.size() > 0) {
             for (Tag tag : tags) {
