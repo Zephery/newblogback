@@ -48,7 +48,7 @@ public class BlogController {
 
     @GetMapping(value = "/{cid}")
     public ModelAndView editArticle(@PathVariable String cid, HttpServletRequest request) {
-        ModelAndView modelAndView=new ModelAndView();
+        ModelAndView modelAndView = new ModelAndView();
         Blog blog = blogService.getBlogDetail(Integer.parseInt(cid));
         modelAndView.addObject("blog", blog);
         List<Category> categories = categoryService.getAllCategory();
@@ -61,7 +61,7 @@ public class BlogController {
     @PostMapping(value = "/modify")
     @ResponseBody
     @Transactional(rollbackFor = TipException.class)
-    public RestResponseBo modifyArticle(Blog blog,HttpServletRequest request) {
+    public RestResponseBo modifyArticle(Blog blog, HttpServletRequest request) {
         try {
             blogService.updateByPrimaryKeySelective(blog);
         } catch (Exception e) {
@@ -101,5 +101,20 @@ public class BlogController {
             return RestResponseBo.fail(msg);
         }
         return RestResponseBo.ok();
+    }
+
+    @PostMapping("/delete")
+    @ResponseBody
+    @Transactional(rollbackFor = TipException.class)
+    public RestResponseBo delete(HttpServletRequest request) {
+        String blogid_string = request.getParameter("blogid");
+        Integer blogid = Integer.parseInt(blogid_string);
+        try {
+            blogService.delete(blogid);
+            return RestResponseBo.ok();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return RestResponseBo.fail();
+        }
     }
 }

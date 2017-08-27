@@ -20,4 +20,5 @@ public interface IBlogService {
     public List<Blog> getAllTechBlog();
     public Integer insertblog(Blog blog);
     public Integer updateByPrimaryKeySelective(Blog blog);
+    public void delete(Integer blogid);
 }

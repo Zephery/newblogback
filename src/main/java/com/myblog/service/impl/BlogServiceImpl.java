@@ -233,4 +233,9 @@ public class BlogServiceImpl implements IBlogService {
         }
         return blog.getBlogid();
     }
+
+    @Override
+    public void delete(Integer blogid) {
+        blogMapper.deleteByPrimaryKey(blogid);
+    }
 }
