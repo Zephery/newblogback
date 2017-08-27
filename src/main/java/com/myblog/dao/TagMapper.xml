@@ -11,7 +11,7 @@
     </resultMap>
     <sql id="Base_Column_List">
     t_id, t_name
-  </sql>
+    </sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
         <include refid="Base_Column_List"/>
@@ -21,11 +21,11 @@
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from tag
     where t_id = #{tId,jdbcType=INTEGER}
-  </delete>
+    </delete>
     <insert id="insert" parameterType="com.myblog.model.Tag" useGeneratedKeys="true" keyProperty="t_id">
     insert into tag(t_name)
     values (#{tName,jdbcType=VARCHAR})
-  </insert>
+    </insert>
     <insert id="insertSelective" parameterType="com.myblog.model.Tag">
         insert into tag
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -58,12 +58,12 @@
     update tag
     set t_name = #{tName,jdbcType=VARCHAR}
     where t_id = #{tId,jdbcType=INTEGER}
-  </update>
+    </update>
     <select id="getTagByBlogId" resultMap="GetTag">
     select tag.t_id,t_name from tag
      where t_id in (select t_id from relation
       where relation.blogid= #{blogid,jdbcType=INTEGER});
-  </select>
+    </select>
     <select id="getblogbytagid" resultMap="com.myblog.dao.BlogMapper.BaseResultMap">
         SELECT * from blog
         where blogid IN (select blogid from relation where t_id=#{t_id})

@@ -8,7 +8,7 @@
     </resultMap>
     <sql id="Base_Column_List">
     id, blogid, t_id
-  </sql>
+    </sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
         <include refid="Base_Column_List"/>
@@ -18,7 +18,7 @@
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from relation
     where id = #{id,jdbcType=INTEGER}
-  </delete>
+    </delete>
     <insert id="insert" parameterType="com.myblog.model.Relation">
     insert into relation (blogid, t_id)
     values (#{blogid,jdbcType=INTEGER}, #{tId,jdbcType=INTEGER})
@@ -65,7 +65,7 @@
     set blogid = #{blogid,jdbcType=INTEGER},
       t_id = #{tId,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
-  </update>
+    </update>
     <delete id="deletebyblogid" parameterType="java.lang.Integer">
         DELETE  FROM relation
         WHERE blogid = #{blogid,jdbcType=INTEGER}

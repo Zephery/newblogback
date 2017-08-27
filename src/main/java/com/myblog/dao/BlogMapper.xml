@@ -13,7 +13,7 @@
     </resultMap>
     <sql id="Base_Column_List">
     blogid, title, summary, content, create_at, categoryid, hits, imageurl
-  </sql>
+    </sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
         <include refid="Base_Column_List"/>
@@ -23,7 +23,7 @@
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from blog
     where blogid = #{blogid,jdbcType=INTEGER}
-  </delete>
+    </delete>
     <insert id="insert" parameterType="com.myblog.model.Blog" useGeneratedKeys="true" keyProperty="blogid">
         insert into blog (title, summary,
         content, create_at, categoryid,
@@ -124,7 +124,7 @@
       hits = #{hits,jdbcType=INTEGER},
       imageurl = #{imageurl,jdbcType=VARCHAR}
     where blogid = #{blogid,jdbcType=INTEGER}
-  </update>
+    </update>
     <select id="getAllBlog" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
@@ -166,7 +166,7 @@
     update blog
     set hits=hits+1
     where blogid = #{blogid,jdbcType=INTEGER}
-  </update>
+    </update>
     <select id="getLife" resultMap="BaseResultMap">
         SELECT
         <include refid="Base_Column_List"/>
