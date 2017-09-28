@@ -31,24 +31,25 @@ public class IndexController {
         return String.valueOf(array.size());
     }
 
-    @GetMapping(value = {"","/index"})
-    public String index(HttpServletRequest request){
-//        List<CommentVo> comments = siteService.recentComments(5);
-//        List<ContentVo> contents = siteService.recentContents(5);
-//        StatisticsBo statistics = siteService.getStatistics();
-        // 取最新的20条日志
-//        List<LogVo> logs = logService.getLogs(1, 5);
-//
-//        request.setAttribute("comments", comments);
-//        request.setAttribute("articles", contents);
-//        request.setAttribute("statistics", statistics);
-//        request.setAttribute("logs", logs);
+    @GetMapping(value = {"", "/index"})
+    public String index(HttpServletRequest request) {
         return "admin/index";
     }
+
     @RequestMapping("mytest")
-    public ModelAndView test(){
-        ModelAndView modelAndView=new ModelAndView();
+    public ModelAndView test() {
+        ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("test");
         return modelAndView;
+    }
+
+    @GetMapping("links")
+    public String links() {
+        return "/admin/links";
+    }
+
+    @GetMapping("setting")
+    public String setting() {
+        return "/admin/setting";
     }
 }

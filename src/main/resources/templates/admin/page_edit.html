@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" th:with="title='保存页面',active='page'">
 <header th:replace="admin/header::headerFragment(${title},${active})"></header>
-<link th:href="@{/admin/plugins/toggles/toggles.css}" rel="stylesheet"/>
-<link th:href="@{/admin/plugins/md/css/style.css}" rel="stylesheet"/>
+<link th:href="@{/plugins/toggles/toggles.css}" rel="stylesheet"/>
+<link th:href="@{/plugins/md/css/style.css}" rel="stylesheet"/>
 <body class="fixed-left">
 <div id="wrapper">
     <div th:replace="admin/header::header-body"></div>
@@ -62,11 +62,11 @@
     </div>
 </div>
 <div th:replace="admin/footer :: footer"></div>
-<script th:src="@{/admin/plugins/md/js/jquery.scrollto.js}"></script>
-<script th:src="@{/admin/plugins/md/js/pagedown.js}"></script>
-<script th:src="@{/admin/plugins/md/js/pagedown-extra.js}"></script>
-<script th:src="@{/admin/plugins/md/js/diff.js}"></script>
-<script th:src="@{/admin/plugins/md/js/md.js}"></script>
+<script th:src="@{/plugins/md/js/jquery.scrollto.js}"></script>
+<script th:src="@{/plugins/md/js/pagedown.js}"></script>
+<script th:src="@{/plugins/md/js/pagedown-extra.js}"></script>
+<script th:src="@{/plugins/md/js/diff.js}"></script>
+<script th:src="@{/plugins/md/js/md.js}"></script>
 
 <script th:src="@{//cdn.bootcss.com/jquery-toggles/2.0.4/toggles.min.js}"></script>
 <script th:src="@{//cdn.bootcss.com/jquery-validate/1.15.1/jquery.validate.min.js}"></script>
