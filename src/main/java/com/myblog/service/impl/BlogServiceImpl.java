@@ -173,7 +173,7 @@ public class BlogServiceImpl implements IBlogService {
         while (matcher.find()) {
             image_url = matcher.group();
         }
-        blog.setImageurl(image_url == null ? "http://ohlrxdl4p.bkt.clouddn.com/timthumb_019.jpg" : image_url);
+        blog.setImageurl(image_url == null ? "http://image.wenzhihuai.com/contentnopicture.jpg" : image_url);
         String array[] = blog.getTagforsplit().split(",");
         List<Tag> tags = new ArrayList<>();
         for (String string : array) {
@@ -207,7 +207,7 @@ public class BlogServiceImpl implements IBlogService {
         while (matcher.find()) {
             image_url = matcher.group();
         }
-        blog.setImageurl(image_url == null ? "http://ohlrxdl4p.bkt.clouddn.com/timthumb_019.jpg" : image_url);
+        blog.setImageurl(image_url == null ? "http://image.wenzhihuai.com/contentnopicture.jpg" : image_url);
         String array[] = blog.getTagforsplit().split(",");
         List<Tag> tags = new ArrayList<>();
         for (String string : array) {
