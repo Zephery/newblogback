@@ -7,7 +7,7 @@
         <result column="t_id" property="tId" jdbcType="INTEGER"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, blogid, t_id
+        id, blogid, t_id
     </sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
@@ -16,12 +16,12 @@
         where id = #{id,jdbcType=INTEGER}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from relation
-    where id = #{id,jdbcType=INTEGER}
+        delete from relation
+        where id = #{id,jdbcType=INTEGER}
     </delete>
     <insert id="insert" parameterType="com.myblog.model.Relation">
-    insert into relation (blogid, t_id)
-    values (#{blogid,jdbcType=INTEGER}, #{tId,jdbcType=INTEGER})
+        insert into relation (id, blogid, t_id)
+        values (#{id,jdbcType=INTEGER}, #{blogid,jdbcType=INTEGER}, #{tId,jdbcType=INTEGER})
     </insert>
     <insert id="insertSelective" parameterType="com.myblog.model.Relation">
         insert into relation
@@ -61,10 +61,10 @@
         where id = #{id,jdbcType=INTEGER}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.myblog.model.Relation">
-    update relation
-    set blogid = #{blogid,jdbcType=INTEGER},
-      t_id = #{tId,jdbcType=INTEGER}
-    where id = #{id,jdbcType=INTEGER}
+        update relation
+        set blogid = #{blogid,jdbcType=INTEGER},
+        t_id = #{tId,jdbcType=INTEGER}
+        where id = #{id,jdbcType=INTEGER}
     </update>
     <delete id="deletebyblogid" parameterType="java.lang.Integer">
         DELETE  FROM relation
