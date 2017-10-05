@@ -1,6 +1,6 @@
 body {
     background: #f5f5f5;
-    font-family: 'Arial', sans-serif;
+    font-family: "微软雅黑", "Lucida Grande", "Lucida Sans", Helvetica, Arial, Sans;
     margin: 0
 }
 
@@ -13,7 +13,7 @@ html {
 
 h1, h2, h3, h4, h5, h6 {
     color: #505458;
-    font-family: 'Roboto', sans-serif;
+    font-family: "微软雅黑", "Lucida Grande", "Lucida Sans", Helvetica, Arial, Sans;
     margin: 10px 0
 }
 
