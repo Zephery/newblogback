@@ -24,7 +24,6 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("/admin/article")
-@Transactional(rollbackFor = TipException.class)
 public class BlogController {
     private final static Logger logger = LoggerFactory.getLogger(BlogController.class);
     @Resource
