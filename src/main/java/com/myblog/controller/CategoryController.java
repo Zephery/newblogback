@@ -1,6 +1,5 @@
 package com.myblog.controller;
 
-import com.myblog.exception.TipException;
 import com.myblog.model.Bo.RestResponseBo;
 import com.myblog.model.Category;
 import com.myblog.model.Tag;
@@ -9,7 +8,6 @@ import com.myblog.service.ITagService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -46,17 +44,12 @@ public class CategoryController extends BaseController {
 
     @PostMapping(value = "save")
     @ResponseBody
-    @Transactional(rollbackFor = TipException.class)
     public RestResponseBo saveCategory(@RequestParam String cName, @RequestParam Integer mid) {
         try {
             categoryService.update_category(cName, mid);
         } catch (Exception e) {
             String msg = "分类保存失败";
-            if (e instanceof TipException) {
-                msg = e.getMessage();
-            } else {
-                logger.error("error", msg);
-            }
+            logger.error(msg, e);
             return RestResponseBo.fail(msg);
         }
         return RestResponseBo.ok();
@@ -64,17 +57,12 @@ public class CategoryController extends BaseController {
 
     @RequestMapping(value = "delete")
     @ResponseBody
-    @Transactional(rollbackFor = TipException.class)
     public RestResponseBo delete(@RequestParam int mid) {
         try {
             categoryService.delete_category(mid);
         } catch (Exception e) {
             String msg = "删除失败";
-            if (e instanceof TipException) {
-                msg = e.getMessage();
-            } else {
-                logger.error("delete error", msg);
-            }
+            logger.error(msg, e);
             return RestResponseBo.fail(msg);
         }
         return RestResponseBo.ok();

@@ -13,6 +13,7 @@ import org.apache.commons.lang.StringUtils;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -35,6 +36,7 @@ public class BlogServiceImpl implements IBlogService {
     private RelationMapper relationMapper;
     @Resource
     private TagMapper tagMapper;
+    private JdbcTemplate jdbcTemplate;
     private static final Logger logger = LoggerFactory.getLogger(BlogServiceImpl.class);
     private static final SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
     private static final String IMGSRC_REG = "(http|https)://.*\\.(jpg|png|gif)";
@@ -165,7 +167,7 @@ public class BlogServiceImpl implements IBlogService {
     }
 
     @Override
-    public Integer insertblog(Blog blog) {
+    public void insertblog(Blog blog) {
         blog.setSummary(blog.getContent().length() > 120 ? blog.getContent().substring(0, 120) : blog.getContent());
         blog.setCreateAt(DateTime.now().toString("yyyy-MM-dd"));
         Matcher matcher = Pattern.compile(IMGSRC_REG).matcher(blog.getContent());
@@ -180,7 +182,11 @@ public class BlogServiceImpl implements IBlogService {
             if (tagMapper.selectByName(string) == null) {
                 Tag tag = new Tag();
                 tag.settName(string);
-                tagMapper.insert(tag);
+                int tId = tagMapper.insertSelective(tag);
+                Tag newtag = tagMapper.selectByName(string);
+                tags.add(newtag);
+//                tag.settId(tId);//TODO 返回主键长不起作用
+//                tags.add(tag);
             } else {
                 tags.add(tagMapper.selectByName(string));
             }
@@ -196,7 +202,6 @@ public class BlogServiceImpl implements IBlogService {
                 relationMapper.insert(relation);
             }
         }
-        return blog.getBlogid();
     }
 
     @Override
@@ -215,7 +220,8 @@ public class BlogServiceImpl implements IBlogService {
                 Tag tag = new Tag();
                 tag.settName(string);
                 tagMapper.insert(tag);    // TODO 为了下面的relation增加标签id
-                tags.add(tag);
+                Tag newtag = tagMapper.selectByName(string);
+                tags.add(newtag);
             } else {
                 tags.add(tagMapper.selectByName(string));
             }

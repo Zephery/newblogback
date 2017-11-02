@@ -14,6 +14,7 @@ import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -22,6 +23,7 @@ import java.util.List;
  * Created by Zephery on 2017/6/20.
  */
 @Service("tagService")
+@Transactional(rollbackFor = Exception.class)
 public class TagServiceImpl implements ITagService {
     @Resource
     private TagMapper tagMapper;
@@ -57,7 +59,13 @@ public class TagServiceImpl implements ITagService {
         });
         return tId;
     }
-    public List<Tag> getAllTags(){
+
+    public List<Tag> getAllTags() {
         return tagMapper.getAllTags();
+    }
+
+    @Override
+    public void deleteTag(Integer tId) throws RuntimeException {
+        tagMapper.deleteByPrimaryKey(tId);
     }
 }

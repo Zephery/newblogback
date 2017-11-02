@@ -35,14 +35,14 @@ public class ShiroController {
     @Resource
     private StringRedisTemplate stringRedisTemplate;
 
-    @GetMapping("login")
+    @GetMapping("/login")
     public ModelAndView get_login() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("login");
         return modelAndView;
     }
 
-    @PostMapping("login")
+    @PostMapping("/login")
     @ResponseBody
     public RestResponseBo login(Admin admin, HttpServletRequest request) throws Exception {
         try {

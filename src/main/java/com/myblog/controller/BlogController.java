@@ -2,7 +2,6 @@ package com.myblog.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.myblog.exception.TipException;
 import com.myblog.model.Blog;
 import com.myblog.model.Bo.RestResponseBo;
 import com.myblog.model.Category;
@@ -11,7 +10,6 @@ import com.myblog.service.ICategoryService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -53,23 +51,18 @@ public class BlogController {
         List<Category> categories = categoryService.getAllCategory();
         modelAndView.addObject("categories", categories);
         modelAndView.addObject("active", "article");
-        modelAndView.setViewName("admin/article_edit");
+        modelAndView.setViewName("/admin/article_edit");
         return modelAndView;
     }
 
     @PostMapping(value = "/modify")
     @ResponseBody
-    @Transactional(rollbackFor = TipException.class)
     public RestResponseBo modifyArticle(Blog blog, HttpServletRequest request) {
         try {
             blogService.updateByPrimaryKeySelective(blog);
         } catch (Exception e) {
             String msg = "文章编辑失败";
-            if (e instanceof TipException) {
-                msg = e.getMessage();
-            } else {
-                logger.error(msg, e);
-            }
+            logger.error(msg, e);
             return RestResponseBo.fail(msg);
         }
         return RestResponseBo.ok();
@@ -80,23 +73,18 @@ public class BlogController {
         List<Category> categoryList = categoryService.getAllCategory();
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("categories", categoryList);
-        modelAndView.setViewName("admin/article_edit");
+        modelAndView.setViewName("/admin/article_edit");
         return modelAndView;
     }
 
     @PostMapping("/publish")
     @ResponseBody
-    @Transactional(rollbackFor = TipException.class)
     public RestResponseBo publishArticle(Blog blog, HttpServletRequest request) {
         try {
             blogService.insertblog(blog);
         } catch (Exception e) {
             String msg = "文章发布失败";
-            if (e instanceof TipException) {
-                msg = e.getMessage();
-            } else {
-                logger.error(msg);
-            }
+            logger.error(msg, e);
             return RestResponseBo.fail(msg);
         }
         return RestResponseBo.ok();
@@ -104,7 +92,6 @@ public class BlogController {
 
     @PostMapping("/delete")
     @ResponseBody
-    @Transactional(rollbackFor = TipException.class)
     public RestResponseBo delete(HttpServletRequest request) {
         String blogid_string = request.getParameter("blogid");
         Integer blogid = Integer.parseInt(blogid_string);

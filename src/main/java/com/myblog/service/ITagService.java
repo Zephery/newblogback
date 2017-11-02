@@ -1,6 +1,5 @@
 package com.myblog.service;
 
-import com.myblog.model.Blog;
 import com.myblog.model.Tag;
 
 import java.util.List;
@@ -10,5 +9,8 @@ import java.util.List;
  */
 public interface ITagService {
     public Integer getBlogByTid(Integer tId);
+
     public List<Tag> getAllTags();
+
+    public void deleteTag(Integer tId) throws RuntimeException;
 }

@@ -2,7 +2,6 @@ package com.myblog.util;
 
 
 import com.myblog.config.WebConst;
-import com.myblog.exception.TipException;
 import com.myblog.model.Admin;
 import org.apache.commons.lang3.StringUtils;
 import org.commonmark.node.Node;
@@ -118,16 +117,16 @@ public class TaleUtils {
      * @param fileName 文件名 如 application-jdbc.properties来自jar中
      * @return
      */
-    public static Properties getPropFromJar(String fileName) {
+    public static Properties getPropFromJar(String fileName) throws Exception {
         Properties properties = new Properties();
         try {
 //            默认是classPath路径
             InputStream resourceAsStream = TaleUtils.class.getClassLoader().getResourceAsStream(fileName);
             if (resourceAsStream == null) {
-                throw new TipException("get resource from path fail");
+                throw new Exception("get resource from path fail");
             }
             properties.load(resourceAsStream);
-        } catch (TipException | IOException e) {
+        } catch (IOException e) {
             LOGGER.error("get properties file fail={}", e.getMessage());
         }
         return properties;
@@ -143,7 +142,7 @@ public class TaleUtils {
 //            默认是classPath路径
             InputStream resourceAsStream = new FileInputStream(fileName);
             properties.load(resourceAsStream);
-        } catch (TipException | IOException e) {
+        } catch (IOException e) {
             LOGGER.error("get properties file fail={}", e.getMessage());
         }
         return properties;
@@ -267,7 +266,7 @@ public class TaleUtils {
             boolean isSSL = false;
             Cookie cookie = new Cookie(WebConst.USER_IN_COOKIE, val);
             cookie.setPath("/");
-            cookie.setMaxAge(60*30);
+            cookie.setMaxAge(60 * 30);
             cookie.setSecure(isSSL);
             response.addCookie(cookie);
         } catch (Exception e) {

@@ -28,6 +28,7 @@
                                         </th:block>
                                         <th:block th:unless="${c.cName == '默认分类'}">
                                             <button type="button"
+                                                    th:class="'btn btn-'+${adminCommons.rand_color()}+' dropdown-toggle waves-effect waves-light'"
                                                     data-toggle="dropdown" aria-expanded="false">
                                                 <th:block th:text="${c.cName}"/>
                                                 <th:block th:text="' ('+${c.cNum}+')'"/>
@@ -56,13 +57,15 @@
                                 <th:block th:each="t : ${tags}">
                                     <div class="btn-group m-b-10">
                                         <button type="button"
+                                                th:class="'btn btn-'+${adminCommons.rand_color()}+' dropdown-toggle waves-effect waves-light'"
                                                 data-toggle="dropdown" aria-expanded="false">
                                             <th:block th:text="${t.tName}"/>
-                                            <span class="caret"></span></button>
-                                        <!--<ul class="dropdown-menu" role="menu">-->
-                                            <!--<li><a href="javascript:void(0)" th:attr="mmid=${t.tId}"-->
-                                                   <!--class="del-category">删除</a></li>-->
-                                        <!--</ul>-->
+                                            <span
+                                                    class="caret"></span></button>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li><a href="javascript:void(0)" th:attr="tId=${t.tId}"
+                                                   class="del-tag">删除</a></li>
+                                        </ul>
                                     </div>
                                 </th:block>
                             </div>
@@ -141,6 +144,28 @@
             }
         });
     });
+
+    $('.del-tag').click(function () {
+        var tId = $(this).attr('tId');
+        console.log(tId);
+        tale.alertConfirm({
+            title: '确定删除该标签吗?',
+            then: function () {
+                tale.post({
+                    url: '/admin/tag/delete',
+                    data: {tId: tId},
+                    success: function (result) {
+                        if (result && result.success) {
+                            tale.alertOkAndReload('删除成功');
+                        } else {
+                            tale.alertError(result.msg || '删除失败');
+                        }
+                    }
+                });
+            }
+        });
+    });
+
     /*]]>*/
 </script>
 </body>

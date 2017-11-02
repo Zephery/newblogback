@@ -6,11 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <meta content="Coderthemes" name="author"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <link rel="shortcut icon" th:href="@{/images/favicon.png}"/>
+    <link rel="shortcut icon" href="http://image.wenzhihuai.com/66.jpg"/>
     <link th:href="@{//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css}" rel="stylesheet" type="text/css"/>
     <link th:href="@{//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css}" rel="stylesheet"/>
     <link th:href="@{/css/style.min.css}" rel="stylesheet" type="text/css"/>
     <link th:href="@{//cdn.bootcss.com/limonte-sweetalert2/6.4.1/sweetalert2.min.css}" rel="stylesheet"/>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
 </head>
 <div th:fragment="header-body">
     <div class="topbar">
@@ -76,6 +82,11 @@
                         <a th:href="@{/admin/attach}"
                            th:class="${active}=='attach'?'waves-effect active':'waves-effect'"><i
                                 class="fa fa-cloud-upload" aria-hidden="true"></i><span> 文件管理 </span></a>
+                    </li>
+                    <li th:class="${active}=='article'?'active':''">
+                        <a th:href="@{/admin/category}"
+                           th:class="${active}=='category'?'waves-effect active':'waves-effect'"><i
+                                class="fa fa-bars" aria-hidden="true"></i><span> 分类管理 </span></a>
                     </li>
                     <li th:class="${active}=='links'?'active':''">
                         <a th:href="@{/admin/links}" th:class="${active}=='links'?'waves-effect active':'waves-effect'"><i

@@ -1,6 +1,5 @@
 package com.myblog.util;
 
-
 import com.myblog.model.Category;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
@@ -19,8 +18,16 @@ public final class AdminCommons {
      * @param cats
      * @return
      */
-    public static boolean exist_cat(Category category, Integer blog_ca) {
-        return category.getcId().equals(blog_ca);
+    public static boolean exist_cat(Category category, String cats) {
+        String[] arr = StringUtils.split(cats, ",");
+        if (null != arr && arr.length > 0) {
+            for (String c : arr) {
+                if (c.trim().equals(category.getcName())) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     private static final String[] COLORS = {"default", "primary", "success", "info", "warning", "danger", "inverse", "purple", "pink"};
@@ -31,3 +38,4 @@ public final class AdminCommons {
     }
 
 }
+

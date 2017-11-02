@@ -1,6 +1,7 @@
 package com.myblog.interceptor;
 
 
+import com.myblog.util.AdminCommons;
 import com.myblog.util.Commons;
 import com.myblog.util.MapCache;
 import org.slf4j.Logger;
@@ -18,27 +19,27 @@ import javax.servlet.http.HttpServletResponse;
  */
 @Component
 public class BaseInterceptor implements HandlerInterceptor {
-    private static final Logger LOGGE = LoggerFactory.getLogger(BaseInterceptor.class);
+    //logger
+    private static final Logger logger = LoggerFactory.getLogger(BaseInterceptor.class);
     private static final String USER_AGENT = "user-agent";
 
     private MapCache cache = MapCache.single();
 
     @Resource
     private Commons commons;
-
+    @Resource
+    private AdminCommons adminCommons;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object o) throws Exception {
         String uri = request.getRequestURI();
-
-        LOGGE.info("UserAgent: {}", request.getHeader(USER_AGENT));
-
         return true;
     }
 
     @Override
     public void postHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, ModelAndView modelAndView) throws Exception {
         httpServletRequest.setAttribute("commons", commons);//一些工具类和公共方法
+        httpServletRequest.setAttribute("adminCommons", adminCommons);
     }
 
     @Override

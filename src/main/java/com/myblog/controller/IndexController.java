@@ -43,19 +43,19 @@ public class IndexController {
         return "admin/index";
     }
 
-    @RequestMapping("mytest")
+    @RequestMapping("/mytest")
     public ModelAndView test() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("test");
         return modelAndView;
     }
 
-    @GetMapping("links")
+    @GetMapping("/links")
     public String links() {
         return "/admin/links";
     }
 
-    @GetMapping("setting")
+    @GetMapping("/setting")
     public String setting() {
         return "/admin/setting";
     }
