@@ -34,7 +34,7 @@ public class TagServiceImpl implements ITagService {
 
     @Override
     @SuppressWarnings({"rawtypes", "unchecked"})
-    public Integer getBlogByTid(Integer tId) {
+    public Integer updatetag(Integer tId) {
         //标签
         List<Tag> tags = tagMapper.getAllTags();
         JsonArray jsonArray = new JsonArray();

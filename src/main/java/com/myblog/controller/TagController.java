@@ -22,11 +22,6 @@ public class TagController {
     @Resource
     private ITagService tagService;
 
-    @GetMapping("/updatetag")
-    public void get() {
-        Integer i = tagService.getBlogByTid(1);
-        System.out.println();
-    }
 
     @GetMapping("/gettag")
     public void gettag() {
