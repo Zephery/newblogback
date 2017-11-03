@@ -51,7 +51,7 @@ public class BlogController {
         List<Category> categories = categoryService.getAllCategory();
         modelAndView.addObject("categories", categories);
         modelAndView.addObject("active", "article");
-        modelAndView.setViewName("/admin/article_edit");
+        modelAndView.setViewName("admin/article_edit");
         return modelAndView;
     }
 
@@ -73,7 +73,7 @@ public class BlogController {
         List<Category> categoryList = categoryService.getAllCategory();
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("categories", categoryList);
-        modelAndView.setViewName("/admin/article_edit");
+        modelAndView.setViewName("admin/article_edit");
         return modelAndView;
     }
 
