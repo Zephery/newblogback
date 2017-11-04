@@ -185,7 +185,7 @@ public class BlogServiceImpl implements IBlogService {
         while (matcher.find()) {
             image_url = matcher.group();
         }
-        blog.setImageurl(image_url == null ? "" : image_url);
+        blog.setImageurl(image_url == null ? PICTURES[Tools.rand(0, PICTURES.length)] : image_url);
         String array[] = blog.getTagforsplit().split(",");
         List<Tag> tags = new ArrayList<>();
         for (String string : array) {
