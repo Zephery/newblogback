@@ -9,11 +9,11 @@ import com.myblog.model.Category;
 import com.myblog.model.Relation;
 import com.myblog.model.Tag;
 import com.myblog.service.IBlogService;
+import com.myblog.util.Tools;
 import org.apache.commons.lang.StringUtils;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -28,6 +28,7 @@ import java.util.regex.Pattern;
  */
 @Service("blogService")
 public class BlogServiceImpl implements IBlogService {
+    private static final Logger logger = LoggerFactory.getLogger(BlogServiceImpl.class);
     @Resource
     private BlogMapper blogMapper;
     @Resource
@@ -36,10 +37,19 @@ public class BlogServiceImpl implements IBlogService {
     private RelationMapper relationMapper;
     @Resource
     private TagMapper tagMapper;
-    private JdbcTemplate jdbcTemplate;
-    private static final Logger logger = LoggerFactory.getLogger(BlogServiceImpl.class);
     private static final SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+    //    正则表达式
     private static final String IMGSRC_REG = "(http|https)://.*\\.(jpg|png|gif)";
+    //    当博客中没有图片的时候
+    private static final String[] PICTURES = {
+            "http://image.wenzhihuai.com/images/20171104105733.png",
+            "http://image.wenzhihuai.com/images/20171104105747.png",
+            "http://image.wenzhihuai.com/images/20171104105808.png",
+            "http://image.wenzhihuai.com/images/20171104110110.png",
+            "http://image.wenzhihuai.com/images/20171104110123.png",
+            "http://image.wenzhihuai.com/contentnopicture.jpg",
+            "http://image.wenzhihuai.com/images/20171104110534.png"
+    };
 
     @Override
     public List<Blog> getAllBlog() {
@@ -175,7 +185,7 @@ public class BlogServiceImpl implements IBlogService {
         while (matcher.find()) {
             image_url = matcher.group();
         }
-        blog.setImageurl(image_url == null ? "http://image.wenzhihuai.com/contentnopicture.jpg" : image_url);
+        blog.setImageurl(image_url == null ? "" : image_url);
         String array[] = blog.getTagforsplit().split(",");
         List<Tag> tags = new ArrayList<>();
         for (String string : array) {
@@ -212,7 +222,7 @@ public class BlogServiceImpl implements IBlogService {
         while (matcher.find()) {
             image_url = matcher.group();
         }
-        blog.setImageurl(image_url == null ? "http://image.wenzhihuai.com/contentnopicture.jpg" : image_url);
+        blog.setImageurl(image_url == null ? PICTURES[Tools.rand(0, PICTURES.length)] : image_url);
         String array[] = blog.getTagforsplit().split(",");
         List<Tag> tags = new ArrayList<>();
         for (String string : array) {
