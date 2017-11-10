@@ -8,7 +8,7 @@
         <result column="c_num" property="cNum" jdbcType="INTEGER"/>
     </resultMap>
     <sql id="Base_Column_List">
-    c_id, c_name, c_descrip, c_num
+        c_id, c_name, c_descrip, c_num
     </sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
@@ -17,14 +17,14 @@
         where c_id = #{cId,jdbcType=INTEGER}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from category
-    where c_id = #{cId,jdbcType=INTEGER}
+        delete from category
+        where c_id = #{cId,jdbcType=INTEGER}
     </delete>
     <insert id="insert" parameterType="com.myblog.model.Category">
-    insert into category (c_id, c_name, c_descrip, 
-      c_num)
-    values (#{cId,jdbcType=INTEGER}, #{cName,jdbcType=VARCHAR}, #{cDescrip,jdbcType=VARCHAR}, 
-      #{cNum,jdbcType=INTEGER})
+        insert into category (c_id, c_name, c_descrip,
+        c_num)
+        values (#{cId,jdbcType=INTEGER}, #{cName,jdbcType=VARCHAR}, #{cDescrip,jdbcType=VARCHAR},
+        #{cNum,jdbcType=INTEGER})
     </insert>
     <insert id="insertSelective" parameterType="com.myblog.model.Category">
         insert into category
@@ -73,20 +73,26 @@
         where c_id = #{cId,jdbcType=INTEGER}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.myblog.model.Category">
-    update category
-    set c_name = #{cName,jdbcType=VARCHAR},
-      c_descrip = #{cDescrip,jdbcType=VARCHAR},
-      c_num = #{cNum,jdbcType=INTEGER}
-    where c_id = #{cId,jdbcType=INTEGER}
+        update category
+        set c_name = #{cName,jdbcType=VARCHAR},
+        c_descrip = #{cDescrip,jdbcType=VARCHAR},
+        c_num = #{cNum,jdbcType=INTEGER}
+        where c_id = #{cId,jdbcType=INTEGER}
     </update>
     <select id="getAllCategory" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from category
     </select>
-    <update id="update_category">
-    update category
-    set c_name = #{cName,jdbcType=VARCHAR},
-    where c_id = #{cId,jdbcType=INTEGER}
-     </update>
+    <insert id="saveorUpdate" parameterType="com.myblog.model.Category">
+        INSERT INTO category (c_name, c_descrip)
+            (SELECT
+                 #{cName,jdbcType=VARCHAR},
+                 'its empty'
+             FROM category
+             WHERE NOT exists (SELECT *
+                              FROM category
+                              WHERE c_name = #{cName,jdbcType=VARCHAR})
+             LIMIT 1);
+     </insert>
 </mapper>

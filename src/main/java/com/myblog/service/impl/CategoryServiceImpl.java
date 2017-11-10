@@ -3,7 +3,6 @@ package com.myblog.service.impl;
 import com.myblog.dao.CategoryMapper;
 import com.myblog.model.Category;
 import com.myblog.service.ICategoryService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -29,7 +28,7 @@ public class CategoryServiceImpl implements ICategoryService {
 
     @Override
     public void update_category(String cName, Integer cId) {
-        categoryMapper.update_category(cName, cId);
+        categoryMapper.saveorUpdate(cName, cId);
     }
 
     @Override

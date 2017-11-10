@@ -21,7 +21,7 @@ import java.util.List;
  * Description:
  */
 @Controller
-@RequestMapping("admin/category")
+@RequestMapping("/admin/category")
 public class CategoryController extends BaseController {
     //logger
     private static final Logger logger = LoggerFactory.getLogger(CategoryController.class);
@@ -38,15 +38,15 @@ public class CategoryController extends BaseController {
         ModelAndView mv = new ModelAndView();
         mv.addObject("categories", categories);
         mv.addObject("tags", tags);
-        mv.setViewName("admin/category");
+        mv.setViewName("/admin/category");
         return mv;
     }
 
-    @PostMapping(value = "save")
+    @PostMapping(value = "/save")
     @ResponseBody
-    public RestResponseBo saveCategory(@RequestParam String cName, @RequestParam Integer mid) {
+    public RestResponseBo saveCategory(String cName, Integer cId) {
         try {
-            categoryService.update_category(cName, mid);
+            categoryService.update_category(cName, cId);
         } catch (Exception e) {
             String msg = "分类保存失败";
             logger.error(msg, e);
@@ -55,11 +55,11 @@ public class CategoryController extends BaseController {
         return RestResponseBo.ok();
     }
 
-    @RequestMapping(value = "delete")
+    @RequestMapping(value = "/delete")
     @ResponseBody
-    public RestResponseBo delete(@RequestParam int mid) {
+    public RestResponseBo delete(@RequestParam int cId) {
         try {
-            categoryService.delete_category(mid);
+            categoryService.delete_category(cId);
         } catch (Exception e) {
             String msg = "删除失败";
             logger.error(msg, e);

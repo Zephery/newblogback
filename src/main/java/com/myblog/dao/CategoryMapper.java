@@ -1,6 +1,7 @@
 package com.myblog.dao;
 
 import com.myblog.model.Category;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -21,5 +22,5 @@ public interface CategoryMapper {
 
     List<Category> getAllCategory();
 
-    public void update_category(String cName, Integer cId);
+    public void saveorUpdate(@Param("cName") String cName, @Param("cId") Integer cId);
 }

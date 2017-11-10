@@ -35,10 +35,10 @@
                                                 <span
                                                         class="caret"></span></button>
                                             <ul class="dropdown-menu" role="menu">
-                                                <li><a href="javascript:void(0)" th:attr="mid=${c.cId},cname=${c.cName}"
+                                                <li><a href="javascript:void(0)" th:attr="cId=${c.cId},cname=${c.cName}"
                                                        class="edit-category">修改</a>
                                                 </li>
-                                                <li><a href="javascript:void(0)" th:attr="mid=${c.cId}"
+                                                <li><a href="javascript:void(0)" th:attr="cId=${c.cId}"
                                                        class="del-category">删除</a></li>
                                             </ul>
                                         </th:block>
@@ -100,13 +100,13 @@
 
     $('#save-category-btn').click(function () {
         var cname = $('#cform #cname').val();
-        var mid = $('#cform #mid').val();
+        var cId = $('#cform #cId').val();
         if (cname && cname != '') {
             tale.post({
                 url: '/admin/category/save',
-                data: {mid: mid, cname: cname},
+                data: {cId: cId, cName: cname},
                 success: function (result) {
-                    $('#cform #mid').val('');
+                    $('#cform #cId').val('');
                     $('#cform #cname').val('');
                     if (result && result.success) {
                         tale.alertOkAndReload('分类保存成功');
@@ -126,13 +126,13 @@
     });
 
     $('.del-category').click(function () {
-        var mid = $(this).attr('mid');
+        var cId = $(this).attr('cId');
         tale.alertConfirm({
             title: '确定删除该项吗?',
             then: function () {
                 tale.post({
                     url: '/admin/category/delete',
-                    data: {mid: mid},
+                    data: {cId: cId},
                     success: function (result) {
                         if (result && result.success) {
                             tale.alertOkAndReload('删除成功');

@@ -40,7 +40,7 @@ public class IndexController {
     public String index(HttpServletRequest request) {
         List<String> loginlog = stringRedisTemplate.opsForList().range("loginlog", 0, 10);
         request.setAttribute("loginlog", loginlog);
-        return "admin/index";
+        return "/admin/index";
     }
 
     @RequestMapping("/mytest")
@@ -57,6 +57,6 @@ public class IndexController {
 
     @GetMapping("/setting")
     public String setting() {
-        return "admin/setting";
+        return "/admin/setting";
     }
 }

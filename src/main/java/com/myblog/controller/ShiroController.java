@@ -38,7 +38,7 @@ public class ShiroController {
     @GetMapping("/login")
     public ModelAndView get_login() {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("login");
+        modelAndView.setViewName("/login");
         return modelAndView;
     }
 
