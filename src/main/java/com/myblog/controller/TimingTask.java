@@ -19,7 +19,7 @@ public class TimingTask {
     @Resource
     private ITagService tagService;
 
-    @Scheduled(cron = "*/10 * * * * *")
+    @Scheduled(cron = "0 30 2 * * *")
     public void executeFileDownLoadTask() {
         Integer i = tagService.updatetag(1);
         logger.info("更新标签云完成");
