@@ -52,7 +52,7 @@ public class IndexController {
 
     @GetMapping("/links")
     public String links() {
-        return "admin/links";
+        return "/admin/links";
     }
 
     @GetMapping("/setting")

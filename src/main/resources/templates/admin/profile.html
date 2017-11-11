@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" th:with="title='个人设置',active='home'">
-<header th:replace="admin/header::headerFragment(${title},${active})"></header>
+<header th:replace="/admin/header::headerFragment(${title},${active})"></header>
 <body>
 <div id="wrapper">
-    <div th:replace="admin/header::header-body"></div>
+    <div th:replace="/admin/header::header-body"></div>
     <div class="content-page">
         <div class="content">
             <div class="container">
@@ -87,12 +87,12 @@
                     </div>
 
                 </div>
-                <div th:replace="admin/footer :: footer-content"></div>
+                <div th:replace="/admin/footer :: footer-content"></div>
             </div>
         </div>
     </div>
 </div>
-<div th:replace="admin/footer :: footer"></div>
+<div th:replace="/admin/footer :: footer"></div>
 <script th:src="@{//cdn.bootcss.com/jquery-validate/1.15.1/jquery.validate.min.js}"></script>
 <script th:src="@{//cdn.bootcss.com/jquery-validate/1.15.1/localization/messages_zh.min.js}"></script>
 <script type="text/javascript">

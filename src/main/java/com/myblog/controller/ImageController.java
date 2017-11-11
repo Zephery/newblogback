@@ -16,7 +16,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 @Controller
-@RequestMapping("admin/attach")
+@RequestMapping("/admin/attach")
 public class ImageController {
     private final static Logger logger = LoggerFactory.getLogger(ImageController.class);
     @Resource
@@ -24,10 +24,10 @@ public class ImageController {
 
     @GetMapping("")
     public String attach(HttpServletRequest request, HttpServletResponse response) {
-        return "admin/attach";
+        return "/admin/attach";
     }
 
-    @PostMapping("upload")
+    @PostMapping("/upload")
     @ResponseBody
     public RestResponseBo upload(HttpServletRequest request, HttpServletResponse response,
                                  @RequestParam("file") MultipartFile[] multipartFiles) throws IOException {

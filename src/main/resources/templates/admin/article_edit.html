@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" th:with="title='保存文章',active='publish'">
-<header th:replace="admin/header::headerFragment(${title},${active})"></header>
+<header th:replace="/admin/header::headerFragment(${title},${active})"></header>
 <link th:href="@{/plugins/tagsinput/jquery.tagsinput.css}" rel="stylesheet"/>
 <link th:href="@{/plugins/select2.dist.css/select2-bootstrap.css}" rel="stylesheet"/>
 <link th:href="@{/plugins/toggles/toggles.css}" rel="stylesheet"/>
@@ -24,7 +24,7 @@
 </style>
 <body class="fixed-left">
 <div id="wrapper">
-    <div th:replace="admin/header::header-body"></div>
+    <div th:replace="/admin/header::header-body"></div>
     <div class="content-page">
         <div class="content">
             <div class="container">
@@ -86,12 +86,12 @@
                         </form>
                     </div>
                 </div>
-                <div th:replace="admin/footer :: footer-content"></div>
+                <div th:replace="/admin/footer :: footer-content"></div>
             </div>
         </div>
     </div>
 </div>
-<div th:replace="admin/footer :: footer"></div>
+<div th:replace="/admin/footer :: footer"></div>
 
 <script th:src="@{/plugins/tagsinput/jquery.tagsinput.min.js}"></script>
 <script th:src="@{/plugins/jquery-multi-select/jquery.quicksearch.js}"></script>

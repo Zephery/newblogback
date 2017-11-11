@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" th:with="title='保存页面',active='page'">
-<header th:replace="admin/header::headerFragment(${title},${active})"></header>
+<header th:replace="/admin/header::headerFragment(${title},${active})"></header>
 <link th:href="@{/plugins/toggles/toggles.css}" rel="stylesheet"/>
 <link th:href="@{/plugins/md/css/style.css}" rel="stylesheet"/>
 <body class="fixed-left">
 <div id="wrapper">
-    <div th:replace="admin/header::header-body"></div>
+    <div th:replace="/admin/header::header-body"></div>
     <div class="content-page">
         <div class="content">
             <div class="container">
@@ -56,12 +56,12 @@
                     </div>
 
                 </div>
-                <div th:replace="admin/footer :: footer-content"></div>
+                <div th:replace="/admin/footer :: footer-content"></div>
             </div>
         </div>
     </div>
 </div>
-<div th:replace="admin/footer :: footer"></div>
+<div th:replace="/admin/footer :: footer"></div>
 <script th:src="@{/plugins/md/js/jquery.scrollto.js}"></script>
 <script th:src="@{/plugins/md/js/pagedown.js}"></script>
 <script th:src="@{/plugins/md/js/pagedown-extra.js}"></script>
