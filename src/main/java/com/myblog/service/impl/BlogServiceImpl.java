@@ -204,10 +204,11 @@ public class BlogServiceImpl implements IBlogService {
         blog.setTags(tags.size() == 0 ? null : tags);
         blog.setHits(0);
         blogMapper.insert(blog);
+        Blog newblog = blogMapper.selectByTitle(blog.getTitle());
         if (tags.size() > 0) {
             for (Tag tag : tags) {
                 Relation relation = new Relation();
-                relation.setBlogid(blog.getBlogid());
+                relation.setBlogid(newblog.getBlogid());
                 relation.settId(tag.gettId());
                 relationMapper.insert(relation);
             }

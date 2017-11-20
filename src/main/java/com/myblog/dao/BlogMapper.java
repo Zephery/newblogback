@@ -39,4 +39,6 @@ public interface BlogMapper {
     List<Blog> getLife();
 
     List<Blog> getAllTechBlog();
+
+    Blog selectByTitle(String title);
 }

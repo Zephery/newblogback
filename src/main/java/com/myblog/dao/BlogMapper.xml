@@ -188,4 +188,10 @@
         WHERE categoryid!=0
         order by blogid desc
     </select>
+    <select id="selectByTitle" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from blog
+        where title = #{title,jdbcType=VARCHAR}
+    </select>
 </mapper>
