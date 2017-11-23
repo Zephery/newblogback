@@ -1,5 +1,7 @@
 package com.myblog.service.impl;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.myblog.dao.BlogMapper;
 import com.myblog.dao.CategoryMapper;
 import com.myblog.dao.RelationMapper;
@@ -9,6 +11,7 @@ import com.myblog.model.Category;
 import com.myblog.model.Relation;
 import com.myblog.model.Tag;
 import com.myblog.service.IBlogService;
+import com.myblog.util.HttpHelper;
 import com.myblog.util.Tools;
 import org.apache.commons.lang.StringUtils;
 import org.joda.time.DateTime;
@@ -176,6 +179,30 @@ public class BlogServiceImpl implements IBlogService {
         return blogs;
     }
 
+    /**
+     * 访问七牛云获取图片的大小
+     *
+     * @param imageurl
+     * @return
+     */
+    private static String getImageURl(String imageurl) {
+        //        http://image.wenzhihuai.com/images/20171018051437.png?imageInfo
+//        {"size":14736,"format":"png","width":667,"height":387,"colorModel":"rgba"}
+        if (imageurl == null) {
+            return PICTURES[Tools.rand(0, PICTURES.length)];
+        } else {
+            String content = HttpHelper.getInstance().get(imageurl + "?imageInfo");
+            JsonParser parser = new JsonParser();
+            JsonObject object = parser.parse(content).getAsJsonObject();
+            Integer height = object.get("height").getAsInt();
+            if (height > 350) {
+                return imageurl;
+            } else {
+                return PICTURES[Tools.rand(0, PICTURES.length)];
+            }
+        }
+    }
+
     @Override
     public void insertblog(Blog blog) {
         blog.setSummary(blog.getContent().length() > 120 ? blog.getContent().substring(0, 120) : blog.getContent());
@@ -185,7 +212,10 @@ public class BlogServiceImpl implements IBlogService {
         while (matcher.find()) {
             image_url = matcher.group();
         }
-        blog.setImageurl(image_url == null ? PICTURES[Tools.rand(0, PICTURES.length)] : image_url);
+//        http://image.wenzhihuai.com/images/20171018051437.png?imageInfo
+//        {"size":14736,"format":"png","width":667,"height":387,"colorModel":"rgba"}
+
+        blog.setImageurl(getImageURl(image_url));
         String array[] = blog.getTagforsplit().split(",");
         List<Tag> tags = new ArrayList<>();
         for (String string : array) {
@@ -223,7 +253,7 @@ public class BlogServiceImpl implements IBlogService {
         while (matcher.find()) {
             image_url = matcher.group();
         }
-        blog.setImageurl(image_url == null ? PICTURES[Tools.rand(0, PICTURES.length)] : image_url);
+        blog.setImageurl(getImageURl(image_url));
         String array[] = blog.getTagforsplit().split(",");
         List<Tag> tags = new ArrayList<>();
         for (String string : array) {
