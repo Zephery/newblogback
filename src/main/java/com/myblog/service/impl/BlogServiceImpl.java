@@ -13,6 +13,7 @@ import com.myblog.model.Tag;
 import com.myblog.service.IBlogService;
 import com.myblog.util.HttpHelper;
 import com.myblog.util.Tools;
+import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
@@ -222,7 +223,7 @@ public class BlogServiceImpl implements IBlogService {
             if (tagMapper.selectByName(string) == null) {
                 Tag tag = new Tag();
                 tag.settName(string);
-                int tId = tagMapper.insertSelective(tag);
+                tagMapper.insertSelective(tag);
                 Tag newtag = tagMapper.selectByName(string);
                 tags.add(newtag);
 //                tag.settId(tId);//TODO 返回主键长不起作用
@@ -233,6 +234,7 @@ public class BlogServiceImpl implements IBlogService {
         }
         blog.setTags(tags.size() == 0 ? null : tags);
         blog.setHits(0);
+        blog.setContent(StringEscapeUtils.escapeSql(blog.getContent()));
         blogMapper.insert(blog);
         Blog newblog = blogMapper.selectByTitle(blog.getTitle());
         if (tags.size() > 0) {
@@ -268,6 +270,7 @@ public class BlogServiceImpl implements IBlogService {
             }
         }
         blog.setTags(tags.size() == 0 ? null : tags);
+        blog.setContent(StringEscapeUtils.escapeSql(blog.getContent()));
         blogMapper.updateByPrimaryKeySelective(blog);
         relationMapper.deletebyblogid(blog.getBlogid());
         if (tags.size() > 0) {

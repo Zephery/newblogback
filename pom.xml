@@ -212,12 +212,6 @@
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
             <version>4.5.3</version>
-            <exclusions>
-                <exclusion>
-                    <artifactId>commons-codec</artifactId>
-                    <groupId>commons-codec</groupId>
-                </exclusion>
-            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
@@ -263,6 +257,9 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
                     <fork>true</fork>
+                    <!--迁移至jdk9所需要添加的参数-->
+                    <!--<jvmArguments>&#45;&#45;add-modules java.xml.bind</jvmArguments>-->
+                    <!--<mainClass>org.springframework.samples.petclinic.PetClinicApplication</mainClass>-->
                 </configuration>
             </plugin>
         </plugins>
