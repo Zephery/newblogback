@@ -35,6 +35,13 @@ public class ShiroController {
     @Resource
     private StringRedisTemplate stringRedisTemplate;
 
+    @GetMapping("/")
+    public ModelAndView indexLogin() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("/login");
+        return modelAndView;
+    }
+
     @GetMapping("/login")
     public ModelAndView get_login() {
         ModelAndView modelAndView = new ModelAndView();
