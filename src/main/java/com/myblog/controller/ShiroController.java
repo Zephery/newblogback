@@ -31,7 +31,7 @@ public class ShiroController {
     private static final Logger logger = LoggerFactory.getLogger(ShiroController.class);
     private static final String LOGINLOG = "loginlog";
     @Resource
-    private IAdminService adminService;
+    private IAdminService admiBlogServiceImplnService;
     @Resource
     private StringRedisTemplate stringRedisTemplate;
 

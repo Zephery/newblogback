@@ -189,10 +189,15 @@ public class BlogServiceImpl implements IBlogService {
     private static String getImageURl(String imageurl) {
         //        http://image.wenzhihuai.com/images/20171018051437.png?imageInfo
 //        {"size":14736,"format":"png","width":667,"height":387,"colorModel":"rgba"}
+        String content;
         if (imageurl == null) {
             return PICTURES[Tools.rand(0, PICTURES.length)];
         } else {
-            String content = HttpHelper.getInstance().get(imageurl + "?imageInfo");
+            if (imageurl.contains("upyuncdn")) {    //又拍云
+                content = HttpHelper.getInstance().get(imageurl + "!imageInfo");
+            } else {    //七牛云
+                content = HttpHelper.getInstance().get(imageurl + "?imageInfo");
+            }
             JsonParser parser = new JsonParser();
             JsonObject object = parser.parse(content).getAsJsonObject();
             Integer height = object.get("height").getAsInt();
