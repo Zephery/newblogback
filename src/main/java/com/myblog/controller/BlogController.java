@@ -81,13 +81,13 @@ public class BlogController {
     @ResponseBody
     public RestResponseBo publishArticle(Blog blog, HttpServletRequest request) {
         try {
-            blogService.insertblog(blog);
+            Integer blogId = blogService.insertblog(blog);
+            return RestResponseBo.ok(blogId);
         } catch (Exception e) {
             String msg = "文章发布失败";
             logger.error(msg, e);
             return RestResponseBo.fail(msg);
         }
-        return RestResponseBo.ok();
     }
 
     @PostMapping("/delete")

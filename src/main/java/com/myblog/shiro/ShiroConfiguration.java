@@ -58,6 +58,7 @@ public class ShiroConfiguration {
 //        filterChainDefinitionMap.put("/webui/**", "anon");
 //        filterChainDefinitionMap.put("/webjars/**", "anon");
         filterChainDefinitionMap.put("/login", "anon");
+        filterChainDefinitionMap.put("/article/publish", "anon");
         filterChainDefinitionMap.put("/admin/**", "authc");
 
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);

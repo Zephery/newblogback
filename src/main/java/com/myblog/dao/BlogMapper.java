@@ -41,4 +41,6 @@ public interface BlogMapper {
     List<Blog> getAllTechBlog();
 
     Blog selectByTitle(String title);
+
+    int selectMaxId();
 }

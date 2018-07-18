@@ -210,7 +210,7 @@ public class BlogServiceImpl implements IBlogService {
     }
 
     @Override
-    public void insertblog(Blog blog) {
+    public synchronized Integer insertblog(Blog blog) {
         blog.setSummary(blog.getContent().length() > 120 ? blog.getContent().substring(0, 120) : blog.getContent());
         blog.setCreateAt(DateTime.now().toString("yyyy-MM-dd"));
         Matcher matcher = Pattern.compile(IMGSRC_REG).matcher(blog.getContent());
@@ -250,6 +250,8 @@ public class BlogServiceImpl implements IBlogService {
                 relationMapper.insert(relation);
             }
         }
+
+        return blogMapper.selectMaxId();
     }
 
     @Override

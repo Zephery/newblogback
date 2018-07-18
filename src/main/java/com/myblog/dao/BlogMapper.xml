@@ -12,7 +12,7 @@
         <result column="imageurl" property="imageurl" jdbcType="VARCHAR"/>
     </resultMap>
     <sql id="Base_Column_List">
-    blogid, title, summary, content, create_at, categoryid, hits, imageurl
+        blogid, title, summary, content, create_at, categoryid, hits, imageurl
     </sql>
     <sql id="NoContent">
         blogid, title, summary, create_at, categoryid, hits, imageurl
@@ -29,11 +29,11 @@
     </delete>
     <insert id="insert" parameterType="com.myblog.model.Blog">
         insert into blog (blogid, title, summary,
-        content, create_at, categoryid,
-        hits, imageurl)
+                          content, create_at, categoryid,
+                          hits, imageurl)
         values (#{blogid,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{summary,jdbcType=VARCHAR},
-        #{content,jdbcType=VARCHAR}, #{createAt,jdbcType=VARCHAR}, #{categoryid,jdbcType=INTEGER},
-        #{hits,jdbcType=INTEGER}, #{imageurl,jdbcType=VARCHAR})
+                #{content,jdbcType=VARCHAR}, #{createAt,jdbcType=VARCHAR}, #{categoryid,jdbcType=INTEGER},
+                #{hits,jdbcType=INTEGER}, #{imageurl,jdbcType=VARCHAR})
     </insert>
     <insert id="insertSelective" parameterType="com.myblog.model.Blog">
         insert into blog
@@ -119,13 +119,13 @@
     </update>
     <update id="updateByPrimaryKey" parameterType="com.myblog.model.Blog">
         update blog
-        set title = #{title,jdbcType=VARCHAR},
-        summary = #{summary,jdbcType=VARCHAR},
-        content = #{content,jdbcType=VARCHAR},
-        create_at = #{createAt,jdbcType=VARCHAR},
-        categoryid = #{categoryid,jdbcType=INTEGER},
-        hits = #{hits,jdbcType=INTEGER},
-        imageurl = #{imageurl,jdbcType=VARCHAR}
+        set title      = #{title,jdbcType=VARCHAR},
+            summary    = #{summary,jdbcType=VARCHAR},
+            content    = #{content,jdbcType=VARCHAR},
+            create_at  = #{createAt,jdbcType=VARCHAR},
+            categoryid = #{categoryid,jdbcType=INTEGER},
+            hits       = #{hits,jdbcType=INTEGER},
+            imageurl   = #{imageurl,jdbcType=VARCHAR}
         where blogid = #{blogid,jdbcType=INTEGER}
     </update>
     <select id="getAllBlog" resultMap="BaseResultMap">
@@ -152,7 +152,9 @@
     </select>
     <select id="getBanner" resultMap="BaseResultMap">
         select
-        blogid, title, imageurl
+            blogid,
+            title,
+            imageurl
         from blog
         order by blogid desc
         limit 5
@@ -163,7 +165,12 @@
            size="1024"
            readOnly="true"/>
     <select id="getHits" resultMap="BaseResultMap">
-        SELECT  blogid, title, create_at, hits, imageurl
+        SELECT
+            blogid,
+            title,
+            create_at,
+            hits,
+            imageurl
         from blog
         WHERE DATE_SUB(CURDATE(), INTERVAL 60 DAY) &lt;= date(create_at)
         order by hits desc
@@ -171,7 +178,7 @@
     </select>
     <update id="updatehits" parameterType="java.lang.Integer">
         update blog
-        set hits=hits+1
+        set hits = hits + 1
         where blogid = #{blogid,jdbcType=INTEGER}
     </update>
     <select id="getLife" resultMap="BaseResultMap">
@@ -193,5 +200,9 @@
         <include refid="Base_Column_List"/>
         from blog
         where title = #{title,jdbcType=VARCHAR}
+    </select>
+    <select id="selectMaxId" resultType="java.lang.Integer">
+        select max(blogid)
+        from blog
     </select>
 </mapper>
