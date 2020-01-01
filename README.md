@@ -14,3 +14,14 @@
 不要使用.html请求json的数据
 
 2.
+
+
+
+
+
+<div align="center">
+
+![](https://upyuncdn.wenzhihuai.com/20190404095747289171304.png)
+
+</div>
+
