@@ -195,8 +195,10 @@ public class BlogServiceImpl implements IBlogService {
         } else {
             if (imageurl.contains("upyuncdn")) {    //又拍云
                 content = HttpHelper.getInstance().get(imageurl + "!imageInfo");
-            } else {    //七牛云
+            } else if(imageurl.contains("wenzhihuai")) {    //七牛云
                 content = HttpHelper.getInstance().get(imageurl + "?imageInfo");
+            }else{
+                return imageurl;
             }
             JsonParser parser = new JsonParser();
             JsonObject object = parser.parse(content).getAsJsonObject();

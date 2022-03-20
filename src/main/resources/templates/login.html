@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" th:with="pic=${commons.random(5, '.png')}"
-      th:style="'background:url(/images/bg/'+@{${pic}}+');no-repeat; background-size: cover;'">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:style="'background:url(/images/bg/1.png);no-repeat; background-size: cover;'">
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
@@ -102,7 +102,7 @@
             success: function (result) {
                 console.log(result);
                 if (result && result.success) {
-                    window.location.href = '/admin/index.html';
+                    window.location.href = '/admin/index';
                 } else {
                     tale.alertError('登录失败');
                 }
